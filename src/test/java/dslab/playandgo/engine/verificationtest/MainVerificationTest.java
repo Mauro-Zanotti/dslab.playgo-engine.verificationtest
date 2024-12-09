@@ -83,7 +83,6 @@ public class MainVerificationTest {
         Player player = createTestPlayer();
         Territory territory = createTestTerritory();
         territoryManager.saveTerritory(territory);
-        ObjectMapper objectMapper = new ObjectMapper();
         List<ValidationResult> vrList = new ArrayList<>();
 
         Path folderPath = Paths.get("src/test/resources/testverificationfiles/");
@@ -94,7 +93,7 @@ public class MainVerificationTest {
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
             for (Path filePath : stream) {
-
+                ObjectMapper objectMapper = new ObjectMapper();
                 String fileName = filePath.toString();
                 String jsonContent = readJsonFromFile(fileName);
                 GeolocationsEvent geolocationsEvent = objectMapper.readValue(jsonContent, GeolocationsEvent.class);
